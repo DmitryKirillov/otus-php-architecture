@@ -4,24 +4,34 @@ declare(strict_types=1);
 
 namespace App\Applicaton\Service;
 
+use App\Applicaton\Contract\BankGatewayInterface;
+use App\Applicaton\Contract\LeadServiceInterface;
 use App\Applicaton\DTO\CreateLeadRequest;
 use App\Applicaton\DTO\CreateLeadResponse;
+use App\Applicaton\DTO\FindLeadRequest;
+use App\Applicaton\DTO\FindLeadResponse;
 use App\Applicaton\DTO\SendLeadGatewayRequest;
+use App\Domain\Contract\LeadRepositoryInterface;
 use App\Domain\Model\Lead;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;
 use App\Infrastructure\Gateway\BankGateway;
 
-class LeadService
+class LeadService implements LeadServiceInterface
 {
-    private BankGateway $bankGateway;
+    private BankGatewayInterface $bankGateway;
+    private LeadRepositoryInterface $leadRepository;
 
     /**
      * @param  BankGateway  $bankGateway
+     * @param  LeadRepositoryInterface  $leadRepository
      */
-    public function __construct(BankGateway $bankGateway)
-    {
+    public function __construct(
+        BankGatewayInterface $bankGateway,
+        LeadRepositoryInterface $leadRepository
+    ) {
         $this->bankGateway = $bankGateway;
+        $this->leadRepository = $leadRepository;
     }
 
     public function createAndSendLead(CreateLeadRequest $createLeadRequest): CreateLeadResponse
@@ -36,6 +46,16 @@ class LeadService
         } catch (\Exception $e) {
             return CreateLeadResponse::createWithError($e->getMessage());
         }
+    }
+
+    public function findLead(FindLeadRequest $findLeadRequest): FindLeadResponse
+    {
+        $lead = $this->leadRepository->findLeadById($findLeadRequest->getId());
+        // todo Обработка ситуации, когда лид не найден
+        return new FindLeadResponse(
+            $lead->getName()->getValue(),
+            $lead->getPhone()->getValue(),
+        );
     }
 
     /**
