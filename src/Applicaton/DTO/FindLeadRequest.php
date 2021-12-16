@@ -7,16 +7,13 @@ namespace App\Applicaton\DTO;
 class FindLeadRequest
 {
     private string $id;
-    private string $format;
 
     /**
      * @param  string  $id
-     * @param  string  $format
      */
-    public function __construct(string $id, string $format)
+    public function __construct(string $id)
     {
         $this->id = $id;
-        $this->format = $format;
     }
 
     /**
@@ -25,14 +22,6 @@ class FindLeadRequest
     public function getId(): string
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFormat(): string
-    {
-        return $this->format;
     }
 
 }
