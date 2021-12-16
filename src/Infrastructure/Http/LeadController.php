@@ -45,9 +45,9 @@ class LeadController extends AbstractFOSRestController
      */
     public function findLead(string $id): Response
     {
-        $request = new FindLeadRequest($id);
-        $lead = $this->leadService->findLead($request);
-        $view = $this->view($lead, 200);
+        $findLeadRequest = new FindLeadRequest($id);
+        $findLeadResponse = $this->leadService->findLead($findLeadRequest);
+        $view = $this->view($findLeadResponse, 200);
         return $this->handleView($view);
     }
 
