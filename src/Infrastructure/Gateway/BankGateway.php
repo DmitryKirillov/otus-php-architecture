@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Gateway;
 
+use App\Applicaton\Contract\BankGatewayInterface;
 use App\Applicaton\DTO\SendLeadGatewayRequest;
 use App\Applicaton\DTO\SendLeadGatewayResponse;
 
