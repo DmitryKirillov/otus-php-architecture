@@ -6,17 +6,41 @@ namespace App\Infrastructure\Http\Output;
 
 class CreateLeadResponse
 {
-    private string $id;
-    private string $error;
+    private ?string $id = null;
+    private ?string $error = null;
+
+    private function __construct()
+    {
+    }
+
+    public static function createWithId(string $id): self
+    {
+        $object = new self();
+        $object->id = $id;
+        return $object;
+    }
+
+    public static function createWithError(string $error): self
+    {
+        $object = new self();
+        $object->error = $error;
+        return $object;
+    }
 
     /**
-     * @param  string  $id
-     * @param  string  $error
+     * @return string|null
      */
-    public function __construct(string $id, string $error)
+    public function getId(): ?string
     {
-        $this->id = $id;
-        $this->error = $error;
+        return $this->id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getError(): ?string
+    {
+        return $this->error;
     }
 
 }
