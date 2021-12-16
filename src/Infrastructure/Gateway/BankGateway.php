@@ -10,9 +10,9 @@ class BankGateway
 {
     public function sendLead(Lead $lead): string
     {
-        sleep(3);
+        sleep(2);
         $id = random_int(10_000, 99_999);
-        if ($id % 1_000 < 3) {
+        if ($id % 10 <= 2) {
             throw new \Exception("При отправке лида возникла ошибка");
         }
         return (string)$id;
