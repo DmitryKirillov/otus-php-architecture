@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Http;
 
-use App\Applicaton\Contract\LeadServiceInterface;
+use App\Applicaton\Contract\CreateLeadInterface;
+use App\Applicaton\Contract\FindLeadInterface;
 use App\Applicaton\DTO\CreateLeadRequest;
 use App\Applicaton\DTO\FindLeadRequest;
-use App\Applicaton\Service\LeadService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -15,14 +15,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LeadController extends AbstractFOSRestController
 {
-    private LeadServiceInterface $leadService;
+    private CreateLeadInterface $createLeadService;
+    private FindLeadInterface $findLeadService;
 
     /**
-     * @param  LeadService  $leadService
+     * @param  CreateLeadInterface  $createLeadService
+     * @param  FindLeadInterface  $findeLeadService
      */
-    public function __construct(LeadServiceInterface $leadService)
+    public function __construct(CreateLeadInterface $createLeadService, FindLeadInterface $findeLeadService)
     {
-        $this->leadService = $leadService;
+        $this->createLeadService = $createLeadService;
+        $this->findLeadService = $findeLeadService;
     }
 
     /**
@@ -33,7 +36,7 @@ class LeadController extends AbstractFOSRestController
      */
     public function createLead(CreateLeadRequest $createLeadRequest): Response
     {
-        $response = $this->leadService->createAndSendLead($createLeadRequest);
+        $response = $this->createLeadService->createAndSendLead($createLeadRequest);
         $view = $this->view($response, 201);
         return $this->handleView($view);
     }
@@ -46,7 +49,7 @@ class LeadController extends AbstractFOSRestController
     public function findLead(string $id): Response
     {
         $findLeadRequest = new FindLeadRequest($id);
-        $findLeadResponse = $this->leadService->findLead($findLeadRequest);
+        $findLeadResponse = $this->findLeadService->findLead($findLeadRequest);
         $view = $this->view($findLeadResponse, 200);
         return $this->handleView($view);
     }

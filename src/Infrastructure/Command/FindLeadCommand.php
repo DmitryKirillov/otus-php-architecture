@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Command;
 
 use App\Applicaton\Contract\FindLeadInterface;
-use App\Applicaton\Contract\LeadServiceInterface;
 use App\Applicaton\DTO\FindLeadRequest;
-use App\Applicaton\Service\LeadService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,11 +16,11 @@ class FindLeadCommand extends Command
     private FindLeadInterface $findLeadService;
 
     /**
-     * @param  LeadService  $leadService
+     * @param  FindLeadInterface  $findLeadService
      */
-    public function __construct(FindLeadInterface $leadService)
+    public function __construct(FindLeadInterface $findLeadService)
     {
-        $this->findLeadService = $leadService;
+        $this->findLeadService = $findLeadService;
         parent::__construct();
     }
 
