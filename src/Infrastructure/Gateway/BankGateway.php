@@ -13,7 +13,7 @@ class BankGateway
         sleep(2);
         $id = random_int(10_000, 99_999);
         if ($id % 10 <= 2) {
-            throw new \Exception("При отправке лида возникла ошибка");
+            throw new \Exception("При отправке лида возникла ошибка на стороне банка");
         }
         return (string)$id;
     }
