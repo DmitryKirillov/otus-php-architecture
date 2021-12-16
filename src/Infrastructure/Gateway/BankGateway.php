@@ -7,7 +7,7 @@ namespace App\Infrastructure\Gateway;
 use App\Applicaton\DTO\SendLeadGatewayRequest;
 use App\Applicaton\DTO\SendLeadGatewayResponse;
 
-class BankGateway
+class BankGateway implements BankGatewayInterface
 {
     public function sendLead(SendLeadGatewayRequest $request): SendLeadGatewayResponse
     {
