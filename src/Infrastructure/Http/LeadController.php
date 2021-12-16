@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Http;
 
+use App\Applicaton\Contract\LeadServiceInterface;
 use App\Applicaton\DTO\CreateLeadRequest;
 use App\Applicaton\DTO\FindLeadRequest;
 use App\Applicaton\Service\LeadService;
@@ -14,12 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LeadController extends AbstractFOSRestController
 {
-    private LeadService $leadService;
+    private LeadServiceInterface $leadService;
 
     /**
      * @param  LeadService  $leadService
      */
-    public function __construct(LeadService $leadService)
+    public function __construct(LeadServiceInterface $leadService)
     {
         $this->leadService = $leadService;
     }
