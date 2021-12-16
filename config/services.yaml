@@ -20,6 +20,8 @@ services:
             - '../src/Domain/Entity/'
             - '../src/Application/Input'
             - '../src/Application/Output'
+            - '../src/Infrastructure/Http/Input'
+            - '../src/Infrastructure/Http/Output'
             - '../src/Kernel.php'
             - '../src/Tests/'
 
