@@ -13,7 +13,7 @@ class LoanLead extends Lead
         $nameDigitsLength = mb_strlen(
             preg_replace('/\D/', '', $name)
         );
-        $average = $nameLength / $nameDigitsLength;
+        $average = $nameDigitsLength !== 0 ? $nameLength / $nameDigitsLength : 0;
         return "Заявка на кредит, клиент $name, средняя длина $average";
     }
 }
