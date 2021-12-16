@@ -8,6 +8,12 @@ class LoanLead extends Lead
 {
     public function getDescription(): string
     {
-        return "Заявка на кредит, клиент {$this->getName()->getValue()}";
+        $name = $this->getName()->getValue();
+        $nameLength = mb_strlen($name);
+        $nameDigitsLength = mb_strlen(
+            preg_replace('/\D/', '', $name)
+        );
+        $average = $nameLength / $nameDigitsLength;
+        return "Заявка на кредит, клиент $name, средняя длина $average";
     }
 }
