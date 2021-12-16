@@ -13,6 +13,7 @@ use App\Applicaton\DTO\FindLeadResponse;
 use App\Applicaton\DTO\SendLeadGatewayRequest;
 use App\Domain\Contract\LeadRepositoryInterface;
 use App\Domain\Model\Lead;
+use App\Domain\Model\LoanLead;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;
 use App\Infrastructure\Gateway\BankGateway;
@@ -55,6 +56,7 @@ class LeadService implements LeadServiceInterface
         return new FindLeadResponse(
             $lead->getName()->getValue(),
             $lead->getPhone()->getValue(),
+            $lead->getDescription()
         );
     }
 
@@ -64,7 +66,7 @@ class LeadService implements LeadServiceInterface
      */
     private function createLead(CreateLeadRequest $createLeadRequest): Lead
     {
-        $lead = new Lead(
+        $lead = new LoanLead(
             new Name($createLeadRequest->getName()),
             new Phone($createLeadRequest->getPhone())
         );

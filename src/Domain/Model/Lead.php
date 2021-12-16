@@ -7,7 +7,7 @@ namespace App\Domain\Model;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;
 
-class Lead
+abstract class Lead
 {
     /** @var Name */
     private Name $name;
@@ -39,6 +39,17 @@ class Lead
     public function getPhone(): Phone
     {
         return $this->phone;
+    }
+
+    public function getDescription(): string
+    {
+        if ($this instanceof LoanLead) {
+            return "Заявка на кредит, клиент {$this->getName()->getValue()}";
+        }
+        if ($this instanceof InsuranceLead) {
+            return "Заявка на страхование, телефон {$this->getPhone()->getValue()}";
+        }
+        return '';
     }
 
 }
