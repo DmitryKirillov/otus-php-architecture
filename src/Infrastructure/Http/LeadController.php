@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Http;
 
 use App\Applicaton\DTO\CreateLeadRequest;
+use App\Applicaton\DTO\FindLeadRequest;
 use App\Applicaton\Service\LeadService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -35,4 +36,18 @@ class LeadController extends AbstractFOSRestController
         $view = $this->view($response, 201);
         return $this->handleView($view);
     }
+
+    /**
+     * @Rest\Get("/api/v1/lead/{id}")
+     * @param  string  $id
+     * @return Response
+     */
+    public function findLead(string $id): Response
+    {
+        $request = new FindLeadRequest($id);
+        $lead = $this->leadService->findLead($request);
+        $view = $this->view($lead, 200);
+        return $this->handleView($view);
+    }
+
 }
