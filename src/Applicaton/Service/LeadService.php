@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Applicaton\Service;
 
+use App\Applicaton\Input\CreateLeadRequest;
+use App\Applicaton\Output\CreateLeadResponse;
 use App\Domain\Model\Lead;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;
 use App\Infrastructure\Gateway\BankGateway;
-use App\Infrastructure\Http\Input\CreateLeadRequest;
-use App\Infrastructure\Http\Output\CreateLeadResponse;
 
 class LeadService
 {

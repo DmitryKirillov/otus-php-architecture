@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Http;
 
+use App\Applicaton\Input\CreateLeadRequest;
 use App\Applicaton\Service\LeadService;
-use App\Infrastructure\Http\Input\CreateLeadRequest;
-use App\Infrastructure\Http\Output\CreateLeadResponse;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

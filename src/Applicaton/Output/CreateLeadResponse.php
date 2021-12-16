@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Http\Output;
+namespace App\Applicaton\Output;
 
 class CreateLeadResponse
 {
