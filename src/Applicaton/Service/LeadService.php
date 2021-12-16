@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Applicaton\Service;
 
-use App\Applicaton\Input\CreateLeadRequest;
-use App\Applicaton\Output\CreateLeadResponse;
+use App\Applicaton\DTO\CreateLeadRequest;
+use App\Applicaton\DTO\CreateLeadResponse;
 use App\Domain\Model\Lead;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;

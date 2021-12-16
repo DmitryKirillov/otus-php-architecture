@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Applicaton\Output;
+namespace App\Applicaton\DTO;
 
 class CreateLeadResponse
 {

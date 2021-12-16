@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Http;
 
-use App\Applicaton\Input\CreateLeadRequest;
+use App\Applicaton\DTO\CreateLeadRequest;
 use App\Applicaton\Service\LeadService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
