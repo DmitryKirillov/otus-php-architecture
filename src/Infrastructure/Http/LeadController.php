@@ -4,23 +4,31 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Http;
 
+use App\Applicaton\Contract\CreateLeadInterface;
+use App\Applicaton\Contract\FindLeadInterface;
 use App\Applicaton\DTO\CreateLeadRequest;
-use App\Applicaton\Service\LeadService;
+use App\Applicaton\DTO\FindLeadRequest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Web-контроллер.
+ */
 class LeadController extends AbstractFOSRestController
 {
-    private LeadService $leadService;
+    private CreateLeadInterface $createLeadService;
+    private FindLeadInterface $findLeadService;
 
     /**
-     * @param  LeadService  $leadService
+     * @param  CreateLeadInterface  $createLeadService
+     * @param  FindLeadInterface  $findeLeadService
      */
-    public function __construct(LeadService $leadService)
+    public function __construct(CreateLeadInterface $createLeadService, FindLeadInterface $findeLeadService)
     {
-        $this->leadService = $leadService;
+        $this->createLeadService = $createLeadService;
+        $this->findLeadService = $findeLeadService;
     }
 
     /**
@@ -31,8 +39,24 @@ class LeadController extends AbstractFOSRestController
      */
     public function createLead(CreateLeadRequest $createLeadRequest): Response
     {
-        $response = $this->leadService->createAndSendLead($createLeadRequest);
+        $response = $this->createLeadService->createAndSendLead($createLeadRequest);
+        // todo Обрабатывать негативные сценарии, используя разные http-коды
         $view = $this->view($response, 201);
         return $this->handleView($view);
     }
+
+    /**
+     * @Rest\Get("/api/v1/lead/{id}")
+     * @param  string  $id
+     * @return Response
+     */
+    public function findLead(string $id): Response
+    {
+        $findLeadRequest = new FindLeadRequest($id);
+        $findLeadResponse = $this->findLeadService->findLead($findLeadRequest);
+        // todo Обрабатывать негативные сценарии, используя разные http-коды
+        $view = $this->view($findLeadResponse, 200);
+        return $this->handleView($view);
+    }
+
 }

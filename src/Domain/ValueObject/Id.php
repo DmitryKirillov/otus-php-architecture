@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\ValueObject;
 
 /**
- * Имя человека.
+ * Идентификатор в формате UUID.
  */
-class Name
+class Id
 {
     private string $value;
 
@@ -16,14 +16,14 @@ class Name
      */
     public function __construct(string $value)
     {
-        $this->assertValidName($value);
+        $this->assertValidUuid($value);
         $this->value = $value;
     }
 
-    private function assertValidName(string $value): void
+    private function assertValidUuid(string $value): void
     {
-        if (mb_strlen($value) < 2) {
-            throw new \InvalidArgumentException("Имя должно содержать минимум 3 символа");
+        if (mb_strlen($value) !== 36) {
+            throw new \InvalidArgumentException("ID должен содержать 36 символов в формате UUID");
         }
     }
 
@@ -34,5 +34,4 @@ class Name
     {
         return $this->value;
     }
-
 }

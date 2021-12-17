@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\ValueObject;
 
+/**
+ * Номер телефона.
+ */
 class Phone
 {
     private string $value;

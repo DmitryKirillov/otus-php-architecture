@@ -9,5 +9,11 @@ use App\Applicaton\DTO\SendLeadGatewayResponse;
 
 interface BankGatewayInterface
 {
+    /**
+     * Отправляет лид в банк.
+     *
+     * @param  SendLeadGatewayRequest  $request
+     * @return SendLeadGatewayResponse
+     */
     public function sendLead(SendLeadGatewayRequest $request): SendLeadGatewayResponse;
 }

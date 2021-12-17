@@ -2,28 +2,37 @@
 
 declare(strict_types=1);
 
-namespace App\Applicaton\Service;
+namespace App\Applicaton\UseCase;
 
+use App\Applicaton\Contract\BankGatewayInterface;
+use App\Applicaton\Contract\CreateLeadInterface;
 use App\Applicaton\DTO\CreateLeadRequest;
 use App\Applicaton\DTO\CreateLeadResponse;
 use App\Applicaton\DTO\SendLeadGatewayRequest;
 use App\Domain\Model\Lead;
+use App\Domain\Model\LoanLead;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;
-use App\Infrastructure\Gateway\BankGateway;
 
-class LeadService
+/**
+ * Use Case: создание лида и его отправка в банк.
+ */
+class CreateLeadUseCase implements CreateLeadInterface
 {
-    private BankGateway $bankGateway;
+    /** @var BankGatewayInterface */
+    private BankGatewayInterface $bankGateway;
 
     /**
-     * @param  BankGateway  $bankGateway
+     * @param  BankGatewayInterface  $bankGateway
      */
-    public function __construct(BankGateway $bankGateway)
+    public function __construct(BankGatewayInterface $bankGateway)
     {
         $this->bankGateway = $bankGateway;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createAndSendLead(CreateLeadRequest $createLeadRequest): CreateLeadResponse
     {
         try {
@@ -44,7 +53,7 @@ class LeadService
      */
     private function createLead(CreateLeadRequest $createLeadRequest): Lead
     {
-        $lead = new Lead(
+        $lead = new LoanLead(
             new Name($createLeadRequest->getName()),
             new Phone($createLeadRequest->getPhone())
         );
