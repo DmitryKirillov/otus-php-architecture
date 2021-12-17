@@ -9,5 +9,12 @@ use App\Applicaton\DTO\CreateLeadResponse;
 
 interface CreateLeadInterface
 {
+    /**
+     * Создаёт объект лида и отправляет его в банк.
+     * todo Продумать разделение этого метода
+     *
+     * @param  CreateLeadRequest  $createLeadRequest
+     * @return CreateLeadResponse
+     */
     public function createAndSendLead(CreateLeadRequest $createLeadRequest): CreateLeadResponse;
 }

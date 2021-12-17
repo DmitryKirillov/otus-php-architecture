@@ -14,8 +14,12 @@ use App\Domain\Model\LoanLead;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Phone;
 
+/**
+ * Use Case: создание лида и его отправка в банк.
+ */
 class CreateLeadUseCase implements CreateLeadInterface
 {
+    /** @var BankGatewayInterface */
     private BankGatewayInterface $bankGateway;
 
     /**
@@ -26,6 +30,9 @@ class CreateLeadUseCase implements CreateLeadInterface
         $this->bankGateway = $bankGateway;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createAndSendLead(CreateLeadRequest $createLeadRequest): CreateLeadResponse
     {
         try {

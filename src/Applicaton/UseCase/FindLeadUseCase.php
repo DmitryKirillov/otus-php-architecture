@@ -9,8 +9,12 @@ use App\Applicaton\DTO\FindLeadRequest;
 use App\Applicaton\DTO\FindLeadResponse;
 use App\Domain\Contract\LeadRepositoryInterface;
 
+/**
+ * Use Case: поиск лида.
+ */
 class FindLeadUseCase implements FindLeadInterface
 {
+    /** @var LeadRepositoryInterface */
     private LeadRepositoryInterface $leadRepository;
 
     /**
@@ -21,6 +25,9 @@ class FindLeadUseCase implements FindLeadInterface
         $this->leadRepository = $leadRepository;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function findLead(FindLeadRequest $findLeadRequest): FindLeadResponse
     {
         $lead = $this->leadRepository->findLeadById($findLeadRequest->getId());

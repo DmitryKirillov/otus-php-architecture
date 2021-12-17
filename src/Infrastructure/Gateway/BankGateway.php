@@ -8,8 +8,14 @@ use App\Applicaton\Contract\BankGatewayInterface;
 use App\Applicaton\DTO\SendLeadGatewayRequest;
 use App\Applicaton\DTO\SendLeadGatewayResponse;
 
+/**
+ * Класс для работы с внешним банковским API.
+ */
 class BankGateway implements BankGatewayInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function sendLead(SendLeadGatewayRequest $request): SendLeadGatewayResponse
     {
         sleep(2);

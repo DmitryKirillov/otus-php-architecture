@@ -13,6 +13,9 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Web-контроллер.
+ */
 class LeadController extends AbstractFOSRestController
 {
     private CreateLeadInterface $createLeadService;
@@ -37,6 +40,7 @@ class LeadController extends AbstractFOSRestController
     public function createLead(CreateLeadRequest $createLeadRequest): Response
     {
         $response = $this->createLeadService->createAndSendLead($createLeadRequest);
+        // todo Обрабатывать негативные сценарии, используя разные http-коды
         $view = $this->view($response, 201);
         return $this->handleView($view);
     }
@@ -50,6 +54,7 @@ class LeadController extends AbstractFOSRestController
     {
         $findLeadRequest = new FindLeadRequest($id);
         $findLeadResponse = $this->findLeadService->findLead($findLeadRequest);
+        // todo Обрабатывать негативные сценарии, используя разные http-коды
         $view = $this->view($findLeadResponse, 200);
         return $this->handleView($view);
     }

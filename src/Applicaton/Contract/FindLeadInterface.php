@@ -9,5 +9,11 @@ use App\Applicaton\DTO\FindLeadResponse;
 
 interface FindLeadInterface
 {
+    /**
+     * Ищет лид по заданным критериям.
+     *
+     * @param  FindLeadRequest  $findLeadRequest
+     * @return FindLeadResponse
+     */
     public function findLead(FindLeadRequest $findLeadRequest): FindLeadResponse;
 }

@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Model;
 
+/**
+ * Кредитный лид.
+ */
 class LoanLead extends Lead
 {
+    /**
+     * @inheritDoc
+     */
     public function getDescription(): string
     {
         $name = $this->getName()->getValue();
